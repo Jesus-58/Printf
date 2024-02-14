@@ -34,11 +34,30 @@ void	ft_putnbr(int n)
 		ft_putchar('0' + n);
 }
 
+static int	format(char type, va_list args)
+{
+	if(type == 'c' || type == '%')
+		ft_putchr(int );
+	if (str[i] == 's')
+		ft_putstr();
+		i++;
+	if (str[i] == 'd' || str[i] == 'i')
+		ft_putnbr();
+		++i;
+	if (str[i] == 'p')
+		ft_putptr();
+		i++;
+				.
+				.
+				.
+}
+
 int	ft_printf(char const *format, ...);
 {
 	int		i;
 	va_list	args;
 
+	va_start(args, format);
 	i = 0;
 	if (!str)
 		return (-1)
@@ -46,21 +65,7 @@ int	ft_printf(char const *format, ...);
 	{
 		if (str[i] == '%')
 			str[i]++;
-			if(str[i] == 'c' || str[i] == '%')
-				ft_putchr();
-				i++;
-			if (str[i] == 's')
-				ft_putstr();
-				i++;
-			if (str[i] == 'd' || str[i] == 'i')
-				ft_putnbr();
-				++i;
-			if (str[i] == 'p')
-				ft_putptr();
-				i++;
-				.
-				.
-				.
+			
 		write(1, str[i], 1);
 		i++;
 	}
