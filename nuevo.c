@@ -31,7 +31,7 @@ int	ft_putnbr(int n)
 	if (n < 0)
 	{
 		if (n == -2147483648)
-			ft_putstr("-2147483648");
+			return(write(1, "-2147483648", 11));
 		ft_putchar('-');
 		n = -n;
 	}
