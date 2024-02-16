@@ -1,22 +1,32 @@
 #include <unistd.h>
 #include <stdio.h>
+#include <stdarg.h>
 
-void	ft_putchar(int c)
+int	ft_putchar(int c)
 {
 	if (!c)
 		return (-1);
-	write(1, &c, 1);
+	else
+		return (write(1, &c, 1));
 }
 
-void	ft_putstr(char *s)
+int	ft_putstr(char *s)
 {
+	int count;
+	
+	count = 0;
 	if (!s)
 		return (-1);
-	while (s)
-		write(1, *s, ft_strlen(s));
+	while (*s)
+	{
+		ft_putchar((int)*s);
+		count++;
+		s++;
+	}
+	return (count);
 }
 
-void	ft_putnbr(int n)
+int	ft_putnbr(int n)
 {
 	if (n < 0)
 	{
@@ -34,40 +44,51 @@ void	ft_putnbr(int n)
 		ft_putchar('0' + n);
 }
 
-static int	format(char type, va_list args)
+static int	select_format(char type, va_list args)
 {
+	int count_chr;
+
+	count_chr = 0;
 	if(type == 'c' || type == '%')
-		ft_putchr(int );
-	if (str[i] == 's')
-		ft_putstr();
-		i++;
-	if (str[i] == 'd' || str[i] == 'i')
-		ft_putnbr();
-		++i;
-	if (str[i] == 'p')
-		ft_putptr();
-		i++;
-				.
-				.
-				.
+		count_chr += ft_putchr(va_arg(args, int);
+	else if (type == 's')
+		count_chr += ft_putstr(va_arg(args, char *));
+	else if (type == 'd')
+		count_chr += ft_putdigit(va_arg(args, int), 10);
+	else if (type == 'x')
+		cont_chr += ft_puthex(va_arg(args, int), 16);
+	else if (type == 'X')
+		cont_chr += ft_puthex(va_arg(args, int), 16);
+	else if (type == 'p')
+		count_chr += ft_putptr(va_arg(args, *));
+	else if (type == 'i')
+		count_chr += ;
+	else if (type == 'u')
+		count_chr *= ;
+	return (count_chr);
 }
 
 int	ft_printf(char const *format, ...);
 {
-	int		i;
+	int		total_chr;
 	va_list	args;
 
 	va_start(args, format);
 	i = 0;
-	if (!str)
+	if (!format)
 		return (-1)
-	while (str[i++])
+	while (*format)
 	{
-		if (str[i] == '%')
-			str[i]++;
-			
-		write(1, str[i], 1);
-		i++;
+		if (*format == '%')
+		{
+			format++;
+			total_chr += select_format(*format, args);
+		}
+		else
+		{
+			total_chr += write(1, format, 1);
+			format++;
+		}
 	}
-	return (i);		
+	return (total_chr);
 }
