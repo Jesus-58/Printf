@@ -16,6 +16,8 @@ int	ft_putstr(char *s)
 	
 	count = 0;
 	if (!s)
+		//Si el ptr es null
+		//return (write(1, "(NULL)", 6));
 		return (-1);
 	while (*s)
 	{
@@ -28,43 +30,61 @@ int	ft_putstr(char *s)
 
 int	ft_putnbr(int n)
 {
+	int	count;
+
+	count = 0;
+	if (n == -2147483648)
+			return(write(1, "-2147483648", 11));
 	if (n < 0)
 	{
-		if (n == -2147483648)
-			return(write(1, "-2147483648", 11));
-		ft_putchar('-');
+		count += write(1, "-", 1);
 		n = -n;
 	}
 	if (n / 10)
 	{
-		ft_putnbr(n / 10);
-		ft_putnbr(n % 10);
+		count += ft_putnbr(n / 10);
+		count += ft_putnbr(n % 10);
 	}
 	else
-		ft_putchar('0' + n);
+		count += ft_putchar('0' + n);
+	return (count);
+}
+
+int	ft_putunbr(int n)
+{
+	int count;
+
+	count = 0;
+	
+	return (count);
 }
 
 static int	select_format(char type, va_list args)
 {
-	int count_chr;
+	int		count_chr;
+	void	*ptr;
 
 	count_chr = 0;
-	if(type == 'c' || type == '%')
+	if(type == 'c')
 		count_chr += ft_putchr(va_arg(args, int);
+	if (type == '%')
+		return (write(1, "%", 1));
 	else if (type == 's')
 		count_chr += ft_putstr(va_arg(args, char *));
-	else if (type == 'd')
-		count_chr += ft_putdigit(va_arg(args, int), 10);
-	else if (type == 'x')
-		cont_chr += ft_puthex(va_arg(args, int), 16);
-	else if (type == 'X')
-		cont_chr += ft_puthex(va_arg(args, int), 16);
-	else if (type == 'p')
-		count_chr += ft_putptr(va_arg(args, *));
-	else if (type == 'i')
-		count_chr += ;
+	else if (type == 'd' || type == 'i')
+		count_chr += ft_putnbr(va_arg(args, int));
 	else if (type == 'u')
-		count_chr *= ;
+		count_chr += ft_putunbr(va_arg(args, unsigned int));
+	else if (type == 'x')
+		cont_chr += ft_puthex_minus(va_arg(args, unsigned int));
+	else if (type == 'X')
+		cont_chr += ft_puthex_mayus(va_arg(args, unsigned int));
+	else if (type == 'p')
+	{
+		count_chr += ftputstr("0x");
+		count_chr += ft_putptr(va_arg(args, unsigned long long));
+	}
+
 	return (count_chr);
 }
 
@@ -90,5 +110,6 @@ int	ft_printf(char const *format, ...);
 			format++;
 		}
 	}
+	va_end(args);
 	return (total_chr);
 }
