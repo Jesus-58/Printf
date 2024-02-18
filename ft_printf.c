@@ -1,63 +1,4 @@
-#include <unistd.h>
-#include <stdio.h>
-#include <stdarg.h>
-
-int	ft_putchar(int c)
-{
-	if (!c)
-		return (-1);
-	else
-		return (write(1, &c, 1));
-}
-
-int	ft_putstr(char *s)
-{
-	int count;
-	
-	count = 0;
-	if (!s)
-		//Si el ptr es null
-		//return (write(1, "(NULL)", 6));
-		return (-1);
-	while (*s)
-	{
-		ft_putchar((int)*s);
-		count++;
-		s++;
-	}
-	return (count);
-}
-
-int	ft_putnbr(int n)
-{
-	int	count;
-
-	count = 0;
-	if (n == -2147483648)
-			return(write(1, "-2147483648", 11));
-	if (n < 0)
-	{
-		count += write(1, "-", 1);
-		n = -n;
-	}
-	if (n / 10)
-	{
-		count += ft_putnbr(n / 10);
-		count += ft_putnbr(n % 10);
-	}
-	else
-		count += ft_putchar('0' + n);
-	return (count);
-}
-
-int	ft_putunbr(int n)
-{
-	int count;
-
-	count = 0;
-	
-	return (count);
-}
+#include "printf.h"
 
 static int	select_format(char type, va_list args)
 {
@@ -66,7 +7,7 @@ static int	select_format(char type, va_list args)
 
 	count_chr = 0;
 	if(type == 'c')
-		count_chr += ft_putchr(va_arg(args, int);
+		count_chr += ft_putchar(va_arg(args, int);
 	if (type == '%')
 		return (write(1, "%", 1));
 	else if (type == 's')
