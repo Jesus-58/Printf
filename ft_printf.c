@@ -1,13 +1,24 @@
-#include "printf.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jesumore <jesumore@student.42malaga.com>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/26 21:30:21 by jesumore          #+#    #+#             */
+/*   Updated: 2024/02/26 21:56:23 by jesus            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "ft_printf.h"
 
 static int	select_format(char type, va_list args)
 {
 	int		count_chr;
-	void	*ptr;
 
 	count_chr = 0;
-	if(type == 'c')
-		count_chr += ft_putchar(va_arg(args, int);
+	if (type == 'c')
+		count_chr += ft_putchar(va_arg(args, int));
 	if (type == '%')
 		return (write(1, "%", 1));
 	else if (type == 's')
@@ -17,27 +28,25 @@ static int	select_format(char type, va_list args)
 	else if (type == 'u')
 		count_chr += ft_putunbr(va_arg(args, unsigned int));
 	else if (type == 'x')
-		cont_chr += ft_puthex_minus(va_arg(args, unsigned int));
+		count_chr += ft_puthex_minus(va_arg(args, unsigned int));
 	else if (type == 'X')
-		cont_chr += ft_puthex_mayus(va_arg(args, unsigned int));
+		count_chr += ft_puthex_mayus(va_arg(args, unsigned int));
 	else if (type == 'p')
 	{
-		count_chr += ftputstr("0x");
+		count_chr += ft_putstr("0x");
 		count_chr += ft_putptr(va_arg(args, unsigned long long));
 	}
-
 	return (count_chr);
 }
 
-int	ft_printf(char const *format, ...);
+int	ft_printf(char const *format, ...)
 {
 	int		total_chr;
 	va_list	args;
 
 	va_start(args, format);
-	i = 0;
 	if (!format)
-		return (-1)
+		return (-1);
 	while (*format)
 	{
 		if (*format == '%')

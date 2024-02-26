@@ -1,13 +1,23 @@
-#include "printf.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jesumore <jesumore@student.42malaga.com>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/26 21:12:58 by jesumore          #+#    #+#             */
+/*   Updated: 2024/02/26 21:52:46 by jesus            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "ft_printf.h"
 
 int	ft_putstr(char *s)
 {
-	int count;
-	
+	int	count;
+
 	count = 0;
 	if (!s)
-		//Si el ptr es null
-		//return (write(1, "(NULL)", 6));
 		return (-1);
 	while (*s)
 	{
