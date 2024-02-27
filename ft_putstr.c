@@ -18,11 +18,10 @@ int	ft_putstr(char *s)
 
 	count = 0;
 	if (!s)
-		return (-1);
+		return (write(1, "(NULL)", 6));
 	while (*s)
 	{
-		ft_putchar((int)*s);
-		count++;
+		count += ft_putchar(*s);
 		s++;
 	}
 	return (count);

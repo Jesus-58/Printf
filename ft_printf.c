@@ -14,12 +14,12 @@
 
 static int	select_format(char type, va_list args)
 {
-	int		count_chr;
+	int	count_chr;
 
 	count_chr = 0;
 	if (type == 'c')
 		count_chr += ft_putchar(va_arg(args, int));
-	if (type == '%')
+	else if (type == '%')
 		return (write(1, "%", 1));
 	else if (type == 's')
 		count_chr += ft_putstr(va_arg(args, char *));
@@ -34,7 +34,7 @@ static int	select_format(char type, va_list args)
 	else if (type == 'p')
 	{
 		count_chr += ft_putstr("0x");
-		count_chr += ft_putptr(va_arg(args, unsigned long long));
+		count_chr += ft_putptr(va_arg(args, void *));
 	}
 	return (count_chr);
 }
@@ -44,6 +44,7 @@ int	ft_printf(char const *format, ...)
 	int		total_chr;
 	va_list	args;
 
+	total_chr = 0;
 	va_start(args, format);
 	if (!format)
 		return (-1);
@@ -53,6 +54,7 @@ int	ft_printf(char const *format, ...)
 		{
 			format++;
 			total_chr += select_format(*format, args);
+			format++;
 		}
 		else
 		{
@@ -63,3 +65,16 @@ int	ft_printf(char const *format, ...)
 	va_end(args);
 	return (total_chr);
 }
+/*
+int	main()
+{
+	int i = 12;
+	int u = -12;
+	char a = 'z';
+	char *s = "jesus";
+	printf("la letra es %c\nEl string es %s\n, a, s);
+	printf("El numero es %i\nEl unsignednum es %u\n", i, u);
+	ft_printf("la letra es %c\nEl string es %s\n, a, s);
+	ft_printf("El numero es %i\nEl unsignednum es %u\n", i, u);
+	return(0);
+}*/

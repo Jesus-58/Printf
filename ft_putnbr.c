@@ -21,15 +21,11 @@ int	ft_putnbr(int n)
 		return (write(1, "-2147483648", 11));
 	if (n < 0)
 	{
-		count += write(1, "-", 1);
+		count += ft_putchar('-');
 		n = -n;
 	}
-	if (n / 10)
-	{
+	if (n >= 10)
 		count += ft_putnbr(n / 10);
-		count += ft_putnbr(n % 10);
-	}
-	else
-		count += ft_putchar('0' + n);
+	count += ft_putchar('0' + n % 10);
 	return (count);
 }
